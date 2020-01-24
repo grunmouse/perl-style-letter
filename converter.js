@@ -23,19 +23,16 @@ class PerlStyleLetterConverter{
 		var base = this.base,
 			nums = [],
 			current = value,
-			count = 0,
 			rest;
-		if(value===0n) return "";
-		do {
+		while(current!==0n) {
 			rest = current % base;
 			current = current / base;
-			if(rest == 0) {
+			if(rest === 0n) {
 				rest = base;
 				--current;
 			}
-			nums[count] = this.abc[rest-1n];
-			++count;
-		} while (current>0);
+			nums.push(this.abc.charAt(Number(rest)-1));
+		};
 		return nums.reverse().join("");
 	}
 
@@ -48,14 +45,14 @@ class PerlStyleLetterConverter{
 		var base = this.base,
 			nums = value.split("").reverse(),
 			i = 0,
-			basei = 0n,
+			basei = 1n,
 			result = 0n,
 			ai, zi = 1n
 		for(; i<nums.length; ++i){
-			basei = basei * base || 1n;
 			ai = zi;
 			zi = ai + (base-1n) * basei;
 			result += ai + BigInt(this.abc.indexOf(nums[i])) * basei;
+			basei = basei * base;
 		}
 		return result;
 	}
