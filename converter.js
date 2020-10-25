@@ -46,12 +46,9 @@ class PerlStyleLetterConverter{
 			nums = value.split("").reverse(),
 			i = 0,
 			basei = 1n,
-			result = 0n,
-			ai, zi = 1n
+			result = 0n;
 		for(; i<nums.length; ++i){
-			ai = zi;
-			zi = ai + (base-1n) * basei;
-			result += ai + BigInt(this.abc.indexOf(nums[i])) * basei;
+			result += BigInt(this.abc.indexOf(nums[i])+1) * basei;
 			basei = basei * base;
 		}
 		return result;
